@@ -101,6 +101,12 @@ export const FINDER_QUESTIONS = [
     icon: 'waves',
     options: ['Borewell', 'Corporation', 'Mixed', 'Tanker'],
   },
+  {
+    id: 'budget',
+    question: 'What is your budget preference?',
+    icon: 'wallet',
+    options: ['Economy', 'Best Value', 'Premium', 'No Compromise'],
+  },
 ] as const
 
 export const TANK_LAYERS = [

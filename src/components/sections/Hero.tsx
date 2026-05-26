@@ -96,7 +96,7 @@ export function Hero() {
 
           <h1 className="font-display text-4xl leading-[1.1] font-bold tracking-tight text-flow-deep md:text-6xl lg:text-7xl">
             India&apos;s Intelligent{' '}
-            <span className="bg-gradient-to-r from-flow-accent to-flow-glow bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-flow-accent to-flow-glow bg-clip-text text-transparent">
               Water Storage
             </span>{' '}
             Solutions
@@ -122,7 +122,7 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <div className="mt-14 grid grid-cols-2 items-start gap-x-6 gap-y-10 sm:grid-cols-4">
             {HERO_STATS.map((stat) => (
               <AnimatedCounter
                 key={stat.label}
@@ -140,7 +140,7 @@ export function Hero() {
           transition={{ duration: 1.2, delay: 0.4 }}
           className="relative h-[420px] md:h-[520px] lg:h-[600px]"
         >
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-flow-glow/10 to-transparent" />
+          <div className="absolute inset-0 rounded-3xl bg-linear-to-b from-flow-glow/10 to-transparent" />
           <Suspense
             fallback={
               <div className="flex h-full items-center justify-center">

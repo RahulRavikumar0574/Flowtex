@@ -38,12 +38,15 @@ export function AnimatedCounter({ value, suffix = '', label, duration = 2 }: Pro
   }, [value, duration])
 
   return (
-    <div ref={ref} className="text-center">
-      <div className="font-display text-3xl font-bold text-flow-deep md:text-4xl">
+    <div
+      ref={ref}
+      className="flex min-h-[92px] flex-col items-center justify-center text-center"
+    >
+      <div className="font-display leading-none whitespace-nowrap tabular-nums text-3xl font-bold text-flow-deep md:text-4xl">
         {display.toLocaleString('en-IN')}
         <span className="text-flow-accent">{suffix}</span>
       </div>
-      <p className="mt-1 text-sm text-flow-navy/70">{label}</p>
+      <p className="mt-1 leading-snug text-sm text-flow-navy/70">{label}</p>
     </div>
   )
 }

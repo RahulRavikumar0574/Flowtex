@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { LucideIcon } from 'lucide-react'
 import {
@@ -8,11 +8,15 @@ import {
   Building2,
   Home,
   Waves,
-  Check,
+  Wallet,
   Sparkles,
 } from 'lucide-react'
 import { SectionHeading } from '../ui/SectionHeading'
 import { FINDER_QUESTIONS } from '../../data/site'
+import { getRecommendations, type UserAnswers } from '../../lib/recommendation'
+import type { AnswerKey } from '../../lib/recommendation/types'
+import { AnalyzingTransition } from '../finder/AnalyzingTransition'
+import { RecommendationDashboard } from '../finder/RecommendationDashboard'
 
 const ICONS: Record<string, LucideIcon> = {
   users: Users,
@@ -21,56 +25,51 @@ const ICONS: Record<string, LucideIcon> = {
   building: Building2,
   home: Home,
   waves: Waves,
+  wallet: Wallet,
 }
 
-function getRecommendation(answers: Record<string, string>) {
-  const climate = answers.climate
-  const usage = answers.usage
-  if (climate === 'Extreme Heat' || usage === 'Very High') {
-    return {
-      name: 'Flowtex 6 Layer Pro',
-      capacity: '1000–2000 L',
-      reason: 'Maximum thermal insulation and antimicrobial protection for demanding conditions.',
-    }
-  }
-  if (climate === 'Hot' || usage === 'High') {
-    return {
-      name: 'Flowtex 4 Layer',
-      capacity: '750–1500 L',
-      reason: 'Balanced performance for warm climates and medium-to-high consumption.',
-    }
-  }
-  return {
-    name: 'Flowtex 3 Layer',
-    capacity: '500–1000 L',
-    reason: 'Efficient solution for moderate climates and standard household usage.',
-  }
-}
+type Phase = 'quiz' | 'analyzing' | 'results'
+
+const ANALYZE_DURATION_MS = 2200
 
 export function SmartTankFinder() {
   const [step, setStep] = useState(0)
-  const [answers, setAnswers] = useState<Record<string, string>>({})
-  const [done, setDone] = useState(false)
+  const [answers, setAnswers] = useState<UserAnswers>({})
+  const [phase, setPhase] = useState<Phase>('quiz')
 
   const q = FINDER_QUESTIONS[step]
-  const progress = done ? 100 : ((step + 1) / FINDER_QUESTIONS.length) * 100
-  const rec = getRecommendation(answers)
+  const progress =
+    phase === 'results' ? 100 : phase === 'analyzing' ? 100 : ((step + 1) / FINDER_QUESTIONS.length) * 100
+
+  const result = useMemo(
+    () => (phase === 'results' ? getRecommendations(answers) : null),
+    [phase, answers],
+  )
+
+  const runAnalysis = useCallback((finalAnswers: UserAnswers) => {
+    setPhase('analyzing')
+    setTimeout(() => {
+      setAnswers(finalAnswers)
+      setPhase('results')
+    }, ANALYZE_DURATION_MS)
+  }, [])
 
   const select = (option: string) => {
     if (!q) return
-    const next = { ...answers, [q.id]: option }
+    const next = { ...answers, [q.id]: option } as UserAnswers
     setAnswers(next)
+
     if (step < FINDER_QUESTIONS.length - 1) {
       setTimeout(() => setStep((s) => s + 1), 400)
     } else {
-      setTimeout(() => setDone(true), 400)
+      setTimeout(() => runAnalysis(next), 400)
     }
   }
 
   const reset = () => {
     setStep(0)
     setAnswers({})
-    setDone(false)
+    setPhase('quiz')
   }
 
   const IconComponent = q ? (ICONS[q.icon as keyof typeof ICONS] ?? Sparkles) : Sparkles
@@ -78,11 +77,11 @@ export function SmartTankFinder() {
   return (
     <section id="finder" className="section-pad relative overflow-hidden bg-white">
       <div className="absolute inset-0 bg-gradient-to-b from-flow-ice/50 to-transparent" />
-      <div className="relative mx-auto max-w-3xl">
+      <div className="relative mx-auto max-w-5xl">
         <SectionHeading
           eyebrow="Smart Tank Finder"
           title="Find Your Perfect Tank"
-          subtitle="Answer a few questions — we'll match you with engineered Flowtex technology."
+          subtitle="Answer a few questions — our weighted compatibility engine ranks the best Flowtex systems for your needs."
         />
 
         <div className="mb-8 h-1.5 overflow-hidden rounded-full bg-flow-ice">
@@ -93,9 +92,9 @@ export function SmartTankFinder() {
           />
         </div>
 
-        <div className="glass-light min-h-[380px] rounded-3xl p-8 shadow-xl shadow-flow-deep/5 md:p-12">
+        <div className="glass-light min-h-[420px] rounded-3xl p-6 shadow-xl shadow-flow-deep/5 md:p-10">
           <AnimatePresence mode="wait">
-            {!done && q ? (
+            {phase === 'quiz' && q && (
               <motion.div
                 key={q.id}
                 initial={{ opacity: 0, x: 40 }}
@@ -122,50 +121,32 @@ export function SmartTankFinder() {
                       whileHover={{ scale: 1.02, y: -2 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => select(opt)}
-                      className="rounded-2xl border border-flow-deep/10 bg-white px-6 py-4 text-left font-medium text-flow-deep transition-colors hover:border-flow-accent hover:bg-flow-ice/50"
+                      className={`rounded-2xl border px-6 py-4 text-left font-medium transition-colors ${
+                        answers[q.id as AnswerKey] === opt
+                          ? 'border-flow-accent bg-flow-accent/10 text-flow-deep'
+                          : 'border-flow-deep/10 bg-white text-flow-deep hover:border-flow-accent hover:bg-flow-ice/50'
+                      }`}
                     >
                       {opt}
                     </motion.button>
                   ))}
                 </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="result"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center"
-              >
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: 'spring', delay: 0.2 }}
-                  className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-flow-accent/15 text-flow-accent"
-                >
-                  <Check size={40} />
-                </motion.div>
-                <p className="text-sm font-semibold uppercase tracking-wider text-flow-accent">
-                  Your Recommendation
-                </p>
-                <h3 className="font-display mt-2 text-3xl font-bold text-flow-deep">{rec.name}</h3>
-                <p className="mt-2 text-flow-accent font-semibold">{rec.capacity}</p>
-                <p className="mx-auto mt-4 max-w-md text-flow-navy/70">{rec.reason}</p>
-                <div className="mt-8 flex flex-wrap justify-center gap-4">
-                  <a
-                    href="#products"
-                    className="glow-cta liquid-btn rounded-full bg-flow-deep px-8 py-3 font-semibold text-white"
-                  >
-                    View Product
-                  </a>
+                {step > 0 && (
                   <button
                     type="button"
-                    onClick={reset}
-                    className="rounded-full border border-flow-deep/20 px-8 py-3 font-semibold text-flow-deep hover:bg-flow-ice"
+                    onClick={() => setStep((s) => s - 1)}
+                    className="mt-6 text-sm font-medium text-flow-navy/60 hover:text-flow-accent"
                   >
-                    Start Over
+                    ← Previous question
                   </button>
-                </div>
+                )}
               </motion.div>
+            )}
+
+            {phase === 'analyzing' && <AnalyzingTransition />}
+
+            {phase === 'results' && result && (
+              <RecommendationDashboard result={result} onReset={reset} />
             )}
           </AnimatePresence>
         </div>
