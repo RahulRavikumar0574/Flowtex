@@ -15,9 +15,20 @@ const app = express()
 const PORT = process.env.PORT || 4000
 const uploadDir = process.env.UPLOAD_DIR || path.join(__dirname, '../uploads')
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://flowtex1.vercel.app',
+]
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
     credentials: true,
   }),
 )
