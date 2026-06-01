@@ -1,15 +1,15 @@
 import type { TankProductMeta } from './types'
 
 /**
- * Product metadata for the recommendation engine.
- * Admin-editable: add products here or load from CMS later.
+ * Representative products for the Smart Tank Finder engine.
+ * Maps to real Flowtex layer categories.
  */
 export const TANK_PRODUCTS: TankProductMeta[] = [
   {
     id: 'ft-3l',
-    name: 'Flowtex 3 Layer',
-    capacityRange: '500–1000 L',
-    capacityLiters: { min: 500, max: 1000 },
+    name: '3 Layer Water Tank',
+    capacityRange: '500–5000 L',
+    capacityLiters: { min: 500, max: 5000 },
     layerCount: 3,
     tier: 'economy',
     heatLabel: 'Up to 45°C',
@@ -26,9 +26,9 @@ export const TANK_PRODUCTS: TankProductMeta[] = [
   },
   {
     id: 'ft-4l',
-    name: 'Flowtex 4 Layer',
-    capacityRange: '750–1500 L',
-    capacityLiters: { min: 750, max: 1500 },
+    name: '4 Layer Water Tank',
+    capacityRange: '500–5000 L',
+    capacityLiters: { min: 500, max: 5000 },
     layerCount: 4,
     tier: 'mid',
     heatLabel: 'Up to 50°C',
@@ -44,41 +44,41 @@ export const TANK_PRODUCTS: TankProductMeta[] = [
     },
   },
   {
+    id: 'ft-5l',
+    name: '5 Layer Puff Water Tank',
+    capacityRange: '500–5000 L',
+    capacityLiters: { min: 500, max: 5000 },
+    layerCount: 5,
+    tier: 'premium',
+    heatLabel: 'Up to 58°C',
+    warranty: '14 Years',
+    tags: ['Puff insulation', 'Hot climates', 'Enhanced thermal'],
+    dimensions: {
+      capacity: 72,
+      heatResistance: 78,
+      durability: 75,
+      uvProtection: 72,
+      antibacterial: 78,
+      tierFit: 68,
+    },
+  },
+  {
     id: 'ft-6l',
-    name: 'Flowtex 6 Layer Pro',
-    capacityRange: '1000–2000 L',
-    capacityLiters: { min: 1000, max: 2000 },
+    name: '6 Layer Puff Water Tank',
+    capacityRange: '1000–5000 L',
+    capacityLiters: { min: 1000, max: 5000 },
     layerCount: 6,
     tier: 'premium',
     heatLabel: 'Up to 60°C',
     warranty: '15 Years',
-    tags: ['Extreme heat', 'Large households', 'Maximum protection'],
+    tags: ['Extreme heat', 'Double puff', 'Maximum protection'],
     dimensions: {
-      capacity: 78,
-      heatResistance: 88,
-      durability: 85,
-      uvProtection: 82,
-      antibacterial: 88,
-      tierFit: 78,
-    },
-  },
-  {
-    id: 'ft-xl',
-    name: 'Flowtex XL Industrial',
-    capacityRange: '2000–5000 L',
-    capacityLiters: { min: 2000, max: 5000 },
-    layerCount: 6,
-    tier: 'industrial',
-    heatLabel: 'Up to 65°C',
-    warranty: '15 Years',
-    tags: ['Commercial', 'Industrial', 'Institutional'],
-    dimensions: {
-      capacity: 95,
-      heatResistance: 95,
-      durability: 92,
-      uvProtection: 88,
+      capacity: 88,
+      heatResistance: 92,
+      durability: 88,
+      uvProtection: 85,
       antibacterial: 90,
-      tierFit: 95,
+      tierFit: 85,
     },
   },
 ]

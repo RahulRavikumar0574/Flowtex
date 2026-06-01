@@ -5,6 +5,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+declare global {
+  interface Window {
+    __flowtexLenis?: Lenis
+  }
+}
+
 export function useLenis() {
   useEffect(() => {
     const lenis = new Lenis({
@@ -43,7 +49,10 @@ export function useLenis() {
     ScrollTrigger.defaults({ scroller: document.body })
     ScrollTrigger.refresh()
 
+    window.__flowtexLenis = lenis
+
     return () => {
+      delete window.__flowtexLenis
       lenis.destroy()
       ScrollTrigger.getAll().forEach((t) => t.kill())
     }

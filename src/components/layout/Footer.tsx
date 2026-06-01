@@ -1,6 +1,13 @@
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { MessageCircle, Mail, Phone, MapPin, Share2, Globe, ExternalLink } from 'lucide-react'
 import { FOOTER_LINKS, PLACEHOLDERS } from '../../data/site'
+import { PRODUCT_CATEGORIES } from '../../data/products'
+
+const FOOTER_COMPANY_HREFS: Record<string, string> = {
+  Certifications: '/certifications',
+  Technology: '/#technology',
+}
 
 function WaveSVG() {
   return (
@@ -77,12 +84,15 @@ export function Footer() {
             <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-flow-glow">
               Products
             </h4>
-            <ul className="space-y-2">
-              {FOOTER_LINKS.products.map((l) => (
-                <li key={l}>
-                  <a href="#products" className="text-sm text-white/60 transition-colors hover:text-white">
-                    {l}
-                  </a>
+            <ul className="max-h-48 space-y-2 overflow-y-auto">
+              {PRODUCT_CATEGORIES.map((cat) => (
+                <li key={cat.id}>
+                  <Link
+                    to={`/products?category=${cat.slug}`}
+                    className="text-sm text-white/60 transition-colors hover:text-white"
+                  >
+                    {cat.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -93,13 +103,23 @@ export function Footer() {
               Company
             </h4>
             <ul className="space-y-2">
-              {FOOTER_LINKS.company.map((l) => (
-                <li key={l}>
-                  <a href="#" className="text-sm text-white/60 transition-colors hover:text-white">
-                    {l}
-                  </a>
-                </li>
-              ))}
+              {FOOTER_LINKS.company.map((l) => {
+                const href = FOOTER_COMPANY_HREFS[l] ?? '#'
+                const className = 'text-sm text-white/60 transition-colors hover:text-white'
+                return (
+                  <li key={l}>
+                    {href.startsWith('/') && !href.includes('#') ? (
+                      <Link to={href} className={className}>
+                        {l}
+                      </Link>
+                    ) : (
+                      <a href={href} className={className}>
+                        {l}
+                      </a>
+                    )}
+                  </li>
+                )
+              })}
             </ul>
           </div>
 

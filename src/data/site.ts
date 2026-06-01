@@ -7,61 +7,19 @@ export const PLACEHOLDERS = {
 
 export const NAV_LINKS = [
   { label: 'Technology', href: '#technology' },
-  { label: 'Products', href: '#products' },
+  { label: 'Products', href: '/products' },
   { label: 'Tank Finder', href: '#finder' },
   { label: 'Industries', href: '#industries' },
   { label: 'Installations', href: '#installations' },
+  { label: 'Certifications', href: '/certifications' },
   { label: 'Knowledge', href: '#knowledge' },
 ] as const
 
 export const HERO_STATS = [
-  { value: 500000, suffix: '+', label: 'Tanks Installed' },
-  { value: 28, suffix: '+', label: 'States Covered' },
-  { value: 15, suffix: ' Yrs', label: 'Warranty' },
+  { value: 1000000, suffix: '+', label: 'Tanks Installed' },
+  { value: 15, suffix: '+', label: 'States Covered' },
+  { value: 10, suffix: ' Yrs', label: 'Warranty' },
   { value: 6, suffix: ' Layer', label: 'Max Technology' },
-] as const
-
-export const PRODUCTS = [
-  {
-    id: 'ft-3l',
-    name: 'Flowtex 3 Layer',
-    layers: '3 Layer',
-    heatResistance: 'Up to 45°C',
-    warranty: '10 Years',
-    useCase: 'Urban homes, moderate climate',
-    image: '[PRODUCT_IMAGES]',
-    specs: '[PRODUCT_SPECIFICATIONS]',
-  },
-  {
-    id: 'ft-4l',
-    name: 'Flowtex 4 Layer',
-    layers: '4 Layer',
-    heatResistance: 'Up to 50°C',
-    warranty: '12 Years',
-    useCase: 'Apartments, commercial rooftops',
-    image: '[PRODUCT_IMAGES]',
-    specs: '[PRODUCT_SPECIFICATIONS]',
-  },
-  {
-    id: 'ft-6l',
-    name: 'Flowtex 6 Layer Pro',
-    layers: '6 Layer',
-    heatResistance: 'Up to 60°C',
-    warranty: '15 Years',
-    useCase: 'Extreme heat, industrial zones',
-    image: '[PRODUCT_IMAGES]',
-    specs: '[PRODUCT_SPECIFICATIONS]',
-  },
-  {
-    id: 'ft-xl',
-    name: 'Flowtex XL Industrial',
-    layers: '6 Layer',
-    heatResistance: 'Up to 65°C',
-    warranty: '15 Years',
-    useCase: 'Factories, hospitals, schools',
-    image: '[PRODUCT_IMAGES]',
-    specs: '[PRODUCT_SPECIFICATIONS]',
-  },
 ] as const
 
 export const FINDER_QUESTIONS = [
@@ -185,7 +143,6 @@ export const BLOG_POSTS = [
 ] as const
 
 export const FOOTER_LINKS = {
-  products: ['3 Layer Tanks', '4 Layer Tanks', '6 Layer Pro', 'Industrial XL'],
   company: ['About Flowtex', 'Technology', 'Certifications', 'Careers'],
   support: ['Find a Dealer', 'Warranty', 'Installation Guide', 'Contact'],
 } as const

@@ -8,7 +8,8 @@ const WaterTank3D = lazy(() =>
 )
 import { Particles } from '../ui/Particles'
 import { AnimatedCounter } from '../ui/AnimatedCounter'
-import { HERO_STATS, PRODUCTS } from '../../data/site'
+import { HERO_STATS } from '../../data/site'
+import { FEATURED_PRODUCTS } from '../../data/products'
 import { useMousePosition } from '../../hooks/useMousePosition'
 
 export function Hero() {
@@ -18,7 +19,7 @@ export function Hero() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCarouselIndex((i) => (i + 1) % PRODUCTS.length)
+      setCarouselIndex((i) => (i + 1) % FEATURED_PRODUCTS.length)
     }, 4000)
     return () => clearInterval(interval)
   }, [])
@@ -91,7 +92,7 @@ export function Hero() {
             transition={{ duration: 4, repeat: Infinity }}
           >
             <Shield size={14} />
-            15 Year Warranty · Made in India
+            10 Year Warranty · Made in India
           </motion.span>
 
           <h1 className="font-display text-4xl leading-[1.1] font-bold tracking-tight text-flow-deep md:text-6xl lg:text-7xl">
@@ -170,7 +171,7 @@ export function Hero() {
           >
             <p className="text-xs text-flow-navy/60">Featured</p>
             <p className="font-display font-semibold text-flow-deep">
-              {PRODUCTS[carouselIndex]?.name ?? PRODUCTS[0].name}
+              {FEATURED_PRODUCTS[carouselIndex]?.name ?? FEATURED_PRODUCTS[0]?.name}
             </p>
           </motion.div>
         </motion.div>
