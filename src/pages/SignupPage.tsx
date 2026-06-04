@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { FlowtexLogo } from '../components/brand/FlowtexLogo'
 
 export function SignupPage() {
   const { signup, user } = useAuth()
@@ -47,6 +48,9 @@ export function SignupPage() {
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-4 py-16">
       <div className="glass-light w-full max-w-md rounded-3xl p-8">
+        <div className="mb-6 flex justify-center">
+          <FlowtexLogo variant="light" size="md" />
+        </div>
         <h1 className="font-display text-2xl font-bold text-flow-deep">Create Account</h1>
         <p className="mt-1 text-sm text-flow-navy/70">Register to request product quotes from Flowtex.</p>
 

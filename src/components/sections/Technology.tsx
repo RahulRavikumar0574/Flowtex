@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import clsx from 'clsx'
 import { SectionHeading } from '../ui/SectionHeading'
 import { TANK_LAYERS } from '../../data/site'
@@ -92,19 +92,6 @@ function TankCrossSection({
                 >
                   {i + 1}
                 </span>
-
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.span
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute -right-1 top-1/2 hidden max-w-[5rem] -translate-y-1/2 translate-x-full truncate rounded-md bg-flow-glow/90 px-2 py-0.5 text-[9px] font-semibold text-flow-deep lg:block"
-                    >
-                      {layer.name}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
 
                 {isActive && (
                   <motion.span

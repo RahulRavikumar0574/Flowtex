@@ -3,6 +3,7 @@ import { LayoutDashboard, LogOut } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import { useEffect, useState } from 'react'
 import { api } from '../../lib/api'
+import { FlowtexLogo } from '../../components/brand/FlowtexLogo'
 
 export function AdminLayout() {
   const { user, loading, logout } = useAuth()
@@ -27,8 +28,8 @@ export function AdminLayout() {
     <div className="flex min-h-screen bg-slate-100">
       <aside className="flex w-56 shrink-0 flex-col bg-flow-deep text-white">
         <div className="border-b border-white/10 p-6">
-          <p className="font-display text-lg font-bold">Flowtex</p>
-          <p className="text-xs text-white/60">Admin Portal</p>
+          <FlowtexLogo variant="dark" size="sm" className="max-w-[140px]" />
+          <p className="mt-2 text-xs text-white/60">Admin Portal</p>
         </div>
         <nav className="flex-1 space-y-1 p-4">
           <Link

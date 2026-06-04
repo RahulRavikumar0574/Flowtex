@@ -23,28 +23,28 @@ export function Industries() {
               viewport={{ once: true, margin: '-20px' }}
               transition={{ delay: i * 0.06 }}
               whileHover={{ scale: 1.04 }}
-              className="group relative h-72 w-64 shrink-0 cursor-pointer overflow-hidden rounded-3xl md:w-80 md:h-80"
+              className="group relative flex h-72 w-64 shrink-0 cursor-pointer flex-col justify-between overflow-hidden rounded-3xl p-6 md:h-80 md:w-80"
             >
-              <div
-                className="absolute inset-0 bg-gradient-to-br from-flow-navy to-flow-deep transition-transform duration-700 group-hover:scale-110"
-                style={{
-                  backgroundImage: `linear-gradient(180deg, transparent 40%, rgba(10,22,40,0.9) 100%)`,
-                }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center text-white/20 text-sm">
-                {ind.image}
-              </div>
-              <div className="absolute inset-0 flex flex-col justify-end p-6">
-                <motion.div
-                  className="translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
+              <div className="absolute inset-0 bg-gradient-to-br from-flow-navy to-flow-deep transition-transform duration-700 group-hover:scale-110" />
+              <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_25%_15%,rgba(77,163,255,0.18),transparent_55%)]" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-white/5" />
+
+              <div className="relative z-10">
+                <motion.span
+                  className="inline-block translate-y-1 opacity-80 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100"
                 >
-                  <span className="text-xs uppercase tracking-wider text-flow-glow">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-flow-glow">
                     Sector
                   </span>
-                </motion.div>
-                <h3 className="font-display text-2xl font-bold text-white">{ind.name}</h3>
-                <p className="mt-2 max-h-0 overflow-hidden text-sm text-white/70 transition-all duration-500 group-hover:max-h-20">
-                  Trusted installations across India
+                </motion.span>
+              </div>
+
+              <div className="relative z-10">
+                <h3 className="font-display text-2xl font-bold leading-tight text-white md:text-3xl">
+                  {ind.name}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/65 transition-colors duration-500 group-hover:text-white/85 md:text-base">
+                  {ind.desc}
                 </p>
               </div>
             </motion.article>

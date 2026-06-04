@@ -1,5 +1,4 @@
 export const PLACEHOLDERS = {
-  logo: '[LOGO]',
   whatsapp: '[WHATSAPP_NUMBER]',
   social: '[SOCIAL_LINKS]',
   brandColors: '[BRAND_COLORS]',
@@ -85,12 +84,30 @@ export const WHY_FEATURES = [
 ] as const
 
 export const INDUSTRIES = [
-  { name: 'Homes', image: '[PRODUCT_IMAGES]' },
-  { name: 'Apartments', image: '[PRODUCT_IMAGES]' },
-  { name: 'Commercial', image: '[PRODUCT_IMAGES]' },
-  { name: 'Hospitals', image: '[PRODUCT_IMAGES]' },
-  { name: 'Industries', image: '[PRODUCT_IMAGES]' },
-  { name: 'Schools', image: '[PRODUCT_IMAGES]' },
+  {
+    name: 'Homes',
+    desc: 'Reliable storage for villas, bungalows, and independent households.',
+  },
+  {
+    name: 'Apartments',
+    desc: 'Scalable systems for multi-unit buildings and housing societies.',
+  },
+  {
+    name: 'Commercial',
+    desc: 'High-capacity solutions for offices, retail, and mixed-use sites.',
+  },
+  {
+    name: 'Hospitals',
+    desc: 'Food-grade, hygienic tanks for clinics and healthcare campuses.',
+  },
+  {
+    name: 'Industries',
+    desc: 'Heavy-duty storage for factories, plants, and processing units.',
+  },
+  {
+    name: 'Schools',
+    desc: 'Durable installations for schools, colleges, and hostels.',
+  },
 ] as const
 
 export const MAP_REGIONS = [

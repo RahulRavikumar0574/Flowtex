@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { MessageCircle, Mail, Phone, MapPin, Share2, Globe, ExternalLink } from 'lucide-react'
 import { FOOTER_LINKS, PLACEHOLDERS } from '../../data/site'
+import { FlowtexLogo } from '../brand/FlowtexLogo'
 import { PRODUCT_CATEGORIES } from '../../data/products'
 
 const FOOTER_COMPANY_HREFS: Record<string, string> = {
@@ -57,9 +58,7 @@ export function Footer() {
       <div className="section-pad relative mx-auto max-w-7xl pt-8">
         <div className="mb-16 grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h3 className="font-display text-2xl font-bold">
-              Flow<span className="text-flow-glow">tex</span>
-            </h3>
+            <FlowtexLogo variant="dark" size="lg" className="max-w-[180px]" />
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               India&apos;s intelligent water storage solutions. Engineering excellence for every
               climate.

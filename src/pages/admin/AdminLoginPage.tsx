@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import { api } from '../../lib/api'
+import { FlowtexLogo } from '../../components/brand/FlowtexLogo'
 
 export function AdminLoginPage() {
   const { login, logout, user } = useAuth()
@@ -40,8 +41,13 @@ export function AdminLoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-flow-deep px-4">
       <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-2xl">
-        <p className="text-xs font-semibold uppercase tracking-wider text-flow-accent">Flowtex Admin</p>
-        <h1 className="font-display mt-1 text-2xl font-bold text-flow-deep">Admin Login</h1>
+        <div className="mb-4 flex justify-center">
+          <FlowtexLogo variant="light" size="md" />
+        </div>
+        <p className="text-center text-xs font-semibold uppercase tracking-wider text-flow-accent">
+          Admin Portal
+        </p>
+        <h1 className="font-display mt-1 text-center text-2xl font-bold text-flow-deep">Admin Login</h1>
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <label className="block text-sm">
             <span className="text-flow-navy/70">Email</span>

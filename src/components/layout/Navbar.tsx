@@ -3,7 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import clsx from 'clsx'
-import { NAV_LINKS, PLACEHOLDERS } from '../../data/site'
+import { NAV_LINKS } from '../../data/site'
+import { FlowtexLogo } from '../brand/FlowtexLogo'
 import { useAuth } from '../../context/AuthContext'
 import { getQuoteNavPath } from '../../lib/quoteNav'
 import { ProductsMegaMenu } from '../products/ProductsMegaMenu'
@@ -82,14 +83,8 @@ export function Navbar() {
             scrolled ? 'glass-light shadow-lg shadow-flow-deep/5' : 'bg-transparent',
           )}
         >
-          <Link to="/" className="font-display text-xl font-bold tracking-tight text-flow-deep">
-            {PLACEHOLDERS.logo !== '[LOGO]' ? (
-              <img src={PLACEHOLDERS.logo} alt="Flowtex" className="h-8" />
-            ) : (
-              <span>
-                Flow<span className="text-flow-accent">tex</span>
-              </span>
-            )}
+          <Link to="/" className="block shrink-0" aria-label="Flowtex home">
+            <FlowtexLogo variant="light" size="sm" />
           </Link>
 
           <ul className="hidden items-center gap-8 lg:flex">
